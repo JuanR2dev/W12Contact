@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">W12Contact</string>
+
+    <string name="years">years</string>
+    <string name="male">man</string>
+    <string name="female">woman</string>
+
+    <string name="dcp_banner">Banner image</string>
+    <string name="dcp_avatar">Avatar image</string>
+    <string name="dcp_gender">Gender icon</string>
+    <string name="dcp_email">Email icon</string>
+    <string name="dcp_phone">Phone icon</string>
+
+    <string name="ellipsis">...</string>
+    <string name="address">Address</string>
+
+    <string name="street">Street</string>
+    <string name="ext_num">Extern Number</string>
+    <string name="int_num">Intern Number</string>
+    <string name="colony">Colony</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="postal_code">Postal Code</string>
+
+</resources>
