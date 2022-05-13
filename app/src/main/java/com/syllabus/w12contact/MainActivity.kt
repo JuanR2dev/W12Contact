@@ -3,9 +3,11 @@ package com.syllabus.w12contact
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +22,18 @@ class MainActivity : AppCompatActivity() {
     private val txtEmail by lazy { findViewById<TextView>(R.id.txt_email) }
     private val txtPhoneNumber by lazy { findViewById<TextView>(R.id.txt_phone_number) }
     private val icGender by lazy { findViewById<ImageView>(R.id.img_gender) }
-    private val btnAddress by lazy { findViewById<Button>(R.id.btn_address) }
+    private val btnSettings by lazy { findViewById<Button>(R.id.btn_settings) }
+
+    private val rootLayout by lazy { findViewById<ConstraintLayout>(R.id.root) }
+
+    fun applyColorOption() {
+        val preferences = getPreferences(MODE_PRIVATE)
+        when (preferences.getInt("theme_color", 0)) {
+            0 -> rootLayout.setBackgroundResource(R.color.colorA)
+            1 -> rootLayout.setBackgroundResource(R.color.colorB)
+            2 -> rootLayout.setBackgroundResource(R.color.colorC)
+        }
+    }
 
     private suspend fun getUserData() {
         // A given person
@@ -60,9 +73,9 @@ class MainActivity : AppCompatActivity() {
             else -> icGender.setImageResource(R.drawable.ic_genderless)
         }
 
-        btnAddress.setOnClickListener {
-            val intent = Intent(this, AddressActivity::class.java)
-            intent.putExtra("user_data",user)
+        btnSettings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            intent.putExtra("user_data", user)
             startActivity(intent)
         }
     }
@@ -70,6 +83,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        applyColorOption()
         scope.launch { getUserData() }
 
     }

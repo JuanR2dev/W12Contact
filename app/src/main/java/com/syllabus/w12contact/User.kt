@@ -19,7 +19,7 @@ data class User(
     var email: String? = null,
     var phoneNumber: String? = null,
     @Embedded
-    var address: Address = Address(),
+    var address: Address? = null,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 ) : Parcelable {
@@ -64,7 +64,7 @@ data class User(
 @Dao
 interface UserDao {
 
-    @Insert
+    @Insert()
     fun insert(user: User)
 
     @Query("SELECT * FROM User WHERE id = :id")

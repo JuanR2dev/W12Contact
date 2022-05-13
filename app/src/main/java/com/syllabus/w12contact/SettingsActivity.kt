@@ -2,15 +2,13 @@ package com.syllabus.w12contact
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-class AddressActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
 
     private val scope = CoroutineScope(SupervisorJob())
     private val userDao by lazy { UserDatabase.getInstance(this).userDao }
@@ -32,7 +30,31 @@ class AddressActivity : AppCompatActivity() {
 
     private val edtPostal by lazy { findViewById<EditText>(R.id.edt_postal) }
 
+    private val rootLayout by lazy { findViewById<ConstraintLayout>(R.id.root) }
+
+    private val btnColorA by lazy { findViewById<ImageButton>(R.id.btn_colorA) }
+    private val btnColorB by lazy { findViewById<ImageButton>(R.id.btn_colorB) }
+    private val btnColorC by lazy { findViewById<ImageButton>(R.id.btn_colorC) }
+
+    private var colorOption
+        get() = getPreferences(MODE_PRIVATE).getInt("theme_color", 0)
+        set(value) {
+            getPreferences(MODE_PRIVATE).edit().putInt("theme_color", value).apply()
+        }
+
+    private var selectedColorOption:Int = 0
+
+    fun applyColorOption(option: Int) {
+        selectedColorOption = option
+        when (option) {
+            0 -> rootLayout.setBackgroundResource(R.color.colorA)
+            1 -> rootLayout.setBackgroundResource(R.color.colorB)
+            2 -> rootLayout.setBackgroundResource(R.color.colorC)
+        }
+    }
+
     private suspend fun saveUserData() {
+        colorOption = selectedColorOption;
         user?.address?.also {
             user?.address?.street = edtStreet.text.toString()
             user?.address?.extern = edtExtern.text.toString()
@@ -44,12 +66,15 @@ class AddressActivity : AppCompatActivity() {
             user?.address?.state = edtState.text.toString()
 
             user?.address?.postalCode = edtPostal.text.toString()
+            userDao.update(user!!)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_address)
+        setContentView(R.layout.activity_settings)
+
+        applyColorOption(colorOption)
 
         "${user?.name} ${user?.lastname}".also { txtUsername.text = it }
         imgAvatar.setImageResource(R.drawable.avatar_example)
@@ -72,6 +97,9 @@ class AddressActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener { scope.launch { saveUserData() } }
+        btnColorA.setOnClickListener { applyColorOption(0) }
+        btnColorB.setOnClickListener { applyColorOption(1) }
+        btnColorC.setOnClickListener { applyColorOption(2) }
 
     }
 }

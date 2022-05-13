@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/root">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/avatar_card"
@@ -29,7 +30,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:foreground="@drawable/avatar_border"
+            android:foreground="@drawable/circle_border"
             app:cardCornerRadius="75dp">
             <ImageView
                 android:id="@+id/img_avatar"
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:columnCount="2"
-        android:rowCount="5"
+        android:rowCount="4"
         app:layout_constraintTop_toBottomOf="@id/avatar_card">
 
         <TextView
@@ -107,20 +108,16 @@
             style="@style/CardInfo"
             />
 
-        <ImageView
-            android:contentDescription="@string/dcp_phone"
-            android:layout_row="4"
-            android:src="@drawable/ic_location_dot"
-            style="@style/CardIcon"
-            />
-
-        <Button
-            android:id="@+id/btn_address"
-            android:text="@string/address"
-            android:layout_row="4"
-            style="@style/CardInfo"
-            />
-
     </GridLayout>
+
+    <Button
+        android:id="@+id/btn_settings"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="@id/root"
+        app:layout_constraintRight_toRightOf="@+id/root"
+        app:layout_constraintTop_toBottomOf="@id/contact_data"
+        android:background="@drawable/ic_gear"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

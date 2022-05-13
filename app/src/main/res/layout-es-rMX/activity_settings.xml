@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    tools:context=".AddressActivity">
+    tools:context=".SettingsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/avatar_card"
@@ -18,7 +18,7 @@
             android:id="@+id/avatar_icon"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:foreground="@drawable/avatar_border"
+            android:foreground="@drawable/circle_border"
             app:cardCornerRadius="36dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -49,16 +49,30 @@
         android:id="@+id/edit_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:orientation="horizontal"
+        android:gravity="right"
         app:layout_constraintRight_toRightOf="@id/root"
         app:layout_constraintTop_toBottomOf="@id/avatar_card">
+
+        <ImageButton
+            android:id="@+id/btn_colorA"
+            android:backgroundTint="@color/colorA"
+            style="@style/ColorOption"/>
+
+        <ImageButton
+            android:id="@+id/btn_colorB"
+            android:backgroundTint="@color/colorB"
+            style="@style/ColorOption"/>
+
+        <ImageButton
+            android:id="@+id/btn_colorC"
+            android:backgroundTint="@color/colorC"
+            style="@style/ColorOption"/>
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             android:text="@string/save" />
 
 
@@ -105,6 +119,15 @@
                 android:inputType="number" />
 
             <View style="@style/DivisorH" />
+
+            <TextView
+                style="@style/AddressLabel"
+                android:text="@string/colony" />
+
+            <EditText
+                android:id="@+id/edt_colony"
+                style="@style/AddressInput"
+                android:inputType="text" />
 
             <TextView
                 style="@style/AddressLabel"

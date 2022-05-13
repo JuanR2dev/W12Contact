@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.W12Contact">
         <activity
-            android:name=".AddressActivity"
+            android:name=".SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
