@@ -24,4 +24,7 @@
     <string name="state">State</string>
     <string name="postal_code">Postal Code</string>
 
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+
 </resources>

@@ -1,8 +1,10 @@
 package com.syllabus.w12contact
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.*
 
-enum class Gender(value:Int) {
+enum class Gender(value: Int) {
     Genderless(0),
     Male(1),
     Female(2)
@@ -17,10 +19,47 @@ data class User(
     var email: String? = null,
     var phoneNumber: String? = null,
     @Embedded
-    var address : Address? = null,
+    var address: Address = Address(),
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readInt(),
+        enumValueOf(parcel.readString() ?: Gender.Genderless.name),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readParcelable(Address::class.java.classLoader) ?: Address(),
+        parcel.readInt()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(lastname)
+        parcel.writeInt(age)
+        parcel.writeString(gender.name)
+        parcel.writeString(email)
+        parcel.writeString(phoneNumber)
+        parcel.writeParcelable(address, flags)
+        parcel.writeInt(id)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<User> {
+        override fun createFromParcel(parcel: Parcel): User {
+            return User(parcel)
+        }
+
+        override fun newArray(size: Int): Array<User?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 @Dao
 interface UserDao {

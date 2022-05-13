@@ -24,4 +24,7 @@
     <string name="state">Estado</string>
     <string name="postal_code">Código Postal</string>
 
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+
 </resources>

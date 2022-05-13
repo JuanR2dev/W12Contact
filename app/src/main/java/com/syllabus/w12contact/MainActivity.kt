@@ -62,8 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         btnAddress.setOnClickListener {
             val intent = Intent(this, AddressActivity::class.java)
-            "${user.name} ${user.lastname}".also { intent.putExtra("user_name", it) }
-            intent.putExtra("user_photo_id", R.drawable.avatar_example)
+            intent.putExtra("user_data",user)
             startActivity(intent)
         }
     }

@@ -108,6 +108,15 @@
 
             <TextView
                 style="@style/AddressLabel"
+                android:text="@string/colony" />
+
+            <EditText
+                android:id="@+id/edt_colony"
+                style="@style/AddressInput"
+                android:inputType="text" />
+
+            <TextView
+                style="@style/AddressLabel"
                 android:text="@string/city" />
 
             <EditText
