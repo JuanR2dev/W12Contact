@@ -1,4 +1,4 @@
-package com.syllabus.w12contact
+package com.syllabus.w12contact.models
 
 import android.content.Context
 import androidx.room.*

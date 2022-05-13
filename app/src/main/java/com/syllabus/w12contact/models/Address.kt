@@ -1,4 +1,4 @@
-package com.syllabus.w12contact
+package com.syllabus.w12contact.models
 
 import android.os.Parcel
 import android.os.Parcelable

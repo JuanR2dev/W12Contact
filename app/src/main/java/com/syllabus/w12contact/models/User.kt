@@ -1,4 +1,4 @@
-package com.syllabus.w12contact
+package com.syllabus.w12contact.models
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -12,7 +12,7 @@ enum class Gender(value: Int) {
 
 @Entity
 data class User(
-    var name: String,
+    var firstname: String,
     var lastname: String,
     var age: Int,
     var gender: Gender = Gender.Genderless,
@@ -36,7 +36,7 @@ data class User(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
+        parcel.writeString(firstname)
         parcel.writeString(lastname)
         parcel.writeInt(age)
         parcel.writeString(gender.name)
