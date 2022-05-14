@@ -26,5 +26,6 @@
 
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="saved">Changes saved</string>
 
 </resources>
