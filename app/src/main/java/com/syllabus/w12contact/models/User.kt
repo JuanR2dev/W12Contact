@@ -1,8 +1,11 @@
 package com.syllabus.w12contact.models
 
+import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.syllabus.w12contact.R
 
 enum class Gender(value: Int) {
     Genderless(0),
@@ -59,24 +62,35 @@ data class User(
             return arrayOfNulls(size)
         }
     }
+
+    fun getFormatName() = "$firstname $lastname"
+    fun getFormatGenderSummary(context:Context) : String {
+        val strYears = context.getString(R.string.years)
+        val strGender = when(gender) {
+            Gender.Genderless -> "..."
+            Gender.Male -> context.getString(R.string.male)
+            Gender.Female -> context.getString(R.string.female)
+        }
+        return "$age $strYears $strGender"
+    }
 }
 
 @Dao
 interface UserDao {
 
     @Insert()
-    fun insert(user: User)
+    suspend fun insert(user: User)
 
     @Query("SELECT * FROM User WHERE id = :id")
-    fun getById(id: Int): User?
+    fun getById(id: Int): LiveData<User?>
 
     @Query("SELECT * FROM User")
-    fun getAll(): List<User>
+    fun getAll(): LiveData<List<User>>
 
     @Update
-    fun update(user: User)
+    suspend fun update(user: User)
 
     @Delete
-    fun delete(user: User)
+    suspend fun delete(user: User)
 
 }
